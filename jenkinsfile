@@ -1,18 +1,18 @@
 pipeline {
     agent any
-
-    stages {
-        pipeline {
-    agent any
+    environment { 
+        CC = 'clang'
+    }
     stages {
         stage('Exemple') {
+            environment { 
+                DEBUG_FLAGS = '-g'
+            }
             steps {
                 echo "Exécution du build ${env.BUILD_ID} sur ${env.JENKINS_URL}"
+                sh 'printenv'
             }
         }
-    }
-}
-
         stage('Build') {
             steps {
                 echo 'Building...'
@@ -30,3 +30,4 @@ pipeline {
         }
     }
 }
+
